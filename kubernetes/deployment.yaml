@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: inference-api
+  namespace: inference
+
+spec:
+
+  replicas: 1
+
+  selector:
+
+    matchLabels:
+      app: inference-api
+
+  template:
+
+    metadata:
+
+      labels:
+        app: inference-api
+
+    spec:
+
+      containers:
+
+      - name: inference-api
+
+        image: inference-api:v1
+
+        ports:
+
+        - containerPort: 8000
+
+        resources:
+
+          limits:
+
+            nvidia.com/gpu: 1
