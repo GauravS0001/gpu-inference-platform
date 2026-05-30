@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: triton-server
+
+spec:
+
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: triton
+
+  template:
+
+    metadata:
+      labels:
+        app: triton
+
+    spec:
+
+      containers:
+
+      - name: triton
+
+        image: nvcr.io/nvidia/tritonserver:24.01-py3
+
+        args:
+        - tritonserver
+        - --model-repository=/models
+
+        ports:
+        - containerPort: 8000
+
+        resources:
+
+          limits:
+            nvidia.com/gpu: 1
+
+        volumeMounts:
+
+        - name: model-repository
+          mountPath: /models
+
+      volumes:
+
+      - name: model-repository
+
+        hostPath:
+          path: /models

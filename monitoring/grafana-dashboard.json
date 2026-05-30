@@ -1,0 +1,51 @@
+{
+  "title": "GPU Inference Platform",
+  "timezone": "browser",
+  "panels": [
+    {
+      "title": "GPU Utilization",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_GPU_UTIL"
+        }
+      ]
+    },
+    {
+      "title": "GPU Memory Usage",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_FB_USED"
+        }
+      ]
+    },
+    {
+      "title": "GPU Temperature",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_GPU_TEMP"
+        }
+      ]
+    },
+    {
+      "title": "Triton Availability",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "up{job=\"triton\"}"
+        }
+      ]
+    },
+    {
+      "title": "vLLM Availability",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "up{job=\"vllm\"}"
+        }
+      ]
+    }
+  ]
+}

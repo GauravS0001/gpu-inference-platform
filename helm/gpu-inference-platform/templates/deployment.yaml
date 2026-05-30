@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: gpu-inference-platform
+
+spec:
+
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+
+    matchLabels:
+
+      app: gpu-inference-platform
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: gpu-inference-platform
+
+        monitoring: enabled
+
+    spec:
+
+      containers:
+
+      - name: vllm
+
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+        args:
+
+        - --model
+
+        - {{ .Values.model.name }}
+
+        ports:
+
+        - containerPort: 8000
+
+        resources:
+
+          limits:
+
+            nvidia.com/gpu: {{ .Values.gpu.count }}

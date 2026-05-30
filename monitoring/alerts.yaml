@@ -1,0 +1,47 @@
+groups:
+
+- name: gpu-platform-alerts
+
+  rules:
+
+  - alert: GPUUtilizationHigh
+
+    expr: DCGM_FI_DEV_GPU_UTIL > 90
+
+    for: 5m
+
+    labels:
+      severity: warning
+
+    annotations:
+      summary: GPU Utilization Above 90 Percent
+
+  - alert: GPUMemoryHigh
+
+    expr: DCGM_FI_DEV_FB_USED > 90
+
+    for: 5m
+
+    labels:
+      severity: warning
+
+    annotations:
+      summary: GPU Memory Usage Above Threshold
+
+  - alert: TritonServerUnavailable
+
+    expr: up{job="triton"} == 0
+
+    for: 2m
+
+    labels:
+      severity: critical
+
+  - alert: VLLMUnavailable
+
+    expr: up{job="vllm"} == 0
+
+    for: 2m
+
+    labels:
+      severity: critical

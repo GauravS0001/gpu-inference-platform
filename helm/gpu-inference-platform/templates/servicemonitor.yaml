@@ -1,0 +1,25 @@
+{{- if .Values.monitoring.enabled }}
+
+apiVersion: monitoring.coreos.com/v1
+
+kind: ServiceMonitor
+
+metadata:
+
+  name: gpu-inference-platform
+
+spec:
+
+  selector:
+
+    matchLabels:
+
+      app: gpu-inference-platform
+
+  endpoints:
+
+  - port: http
+
+    interval: 30s
+
+{{- end }}

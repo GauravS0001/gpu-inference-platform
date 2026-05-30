@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+
+kind: ServiceMonitor
+
+metadata:
+  name: gpu-inference-platform
+
+spec:
+
+  selector:
+
+    matchLabels:
+      monitoring: enabled
+
+  endpoints:
+
+  - port: metrics
+
+    interval: 30s
+
+    path: /metrics

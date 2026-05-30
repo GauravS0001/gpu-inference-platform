@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: inference-api
+
+spec:
+
+  replicas: 1
+
+  strategy:
+
+    type: RollingUpdate
+
+    rollingUpdate:
+
+      maxSurge: 1
+
+      maxUnavailable: 0
+
+  selector:
+
+    matchLabels:
+      app: inference-api
+
+  template:
+
+    metadata:
+
+      labels:
+        app: inference-api
+        version: v1
+
+    spec:
+
+      containers:
+
+      - name: inference-api
+
+        image: inference-api:v1
+
+        ports:
+
+        - containerPort: 8000

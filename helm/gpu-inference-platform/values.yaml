@@ -1,0 +1,33 @@
+replicaCount: 1
+
+image:
+  repository: vllm/vllm-openai
+  tag: latest
+
+gpu:
+
+  enabled: true
+
+  count: 1
+
+service:
+
+  type: ClusterIP
+
+  port: 8000
+
+autoscaling:
+
+  enabled: false
+
+  minReplicas: 1
+
+  maxReplicas: 5
+
+monitoring:
+
+  enabled: true
+
+model:
+
+  name: mistralai/Mistral-7B-Instruct-v0.2

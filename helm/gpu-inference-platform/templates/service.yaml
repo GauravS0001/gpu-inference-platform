@@ -1,0 +1,23 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+
+  name: gpu-inference-platform
+
+spec:
+
+  selector:
+
+    app: gpu-inference-platform
+
+  ports:
+
+  - port: {{ .Values.service.port }}
+
+    targetPort: 8000
+
+    name: http
+
+  type: {{ .Values.service.type }}
